@@ -3,6 +3,7 @@ const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const User = require('../models/user'); // Ensure this model is defined correctly
 
+
 router.post('/signup',  async(req, res) => {
     try {
         //1.If the user already exists 
