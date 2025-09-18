@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 // Load environment variables from .env file and set them in process.env
 //connection logic
 mongoose.connect(process.env.CONNECTION_STRING);
-
 // Check if the connection status
 const db = mongoose.connection;
 
