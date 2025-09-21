@@ -5,12 +5,14 @@ import Login from './pages/login';
 import Signup from './pages/signup';
 import { Toaster } from 'react-hot-toast';
 import ProtectedRoutes from './components/protectedRoutes.js';
+import Loader from './components/loader.js';
 
 
 function App() {
   return (
     <div className="App">
       <Toaster position="top-center" reverseOrder={false}/>
+      <Loader/>
      <BroweserRouter>
           <Routes>
             
