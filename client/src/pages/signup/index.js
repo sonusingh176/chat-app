@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { signupUser } from "../../apiCalls/auth";
 import toast, { Toaster } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "../../redux/loaderSlice";
 
 
 
@@ -16,11 +18,15 @@ function Signup(){
         password:''
     });
 
+    const dispatch = useDispatch();
+
     async function onFormSubmit(e){
         e.preventDefault();
         let response =null
         try {
+             dispatch(showLoader());
             response = await signupUser(user);
+             dispatch(hideLoader());
          
            if(response.success){
             toast.success(response.message);
@@ -29,6 +35,7 @@ function Signup(){
            }
         } catch (error) {
             toast.error(response.message);
+             dispatch(hideLoader());
         }
 
     }

@@ -2,7 +2,9 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const loaderSlice = createSlice({
     name: 'loader',
-    initialState:false,
+    initialState:{
+        loader: false,   // object ke andar property
+      },
     reducers: {
         showLoader: (state) => {state.loader=true;},
         hideLoader: (state) => {state.loader=false;},

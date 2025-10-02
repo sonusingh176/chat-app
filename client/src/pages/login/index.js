@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { loginUser } from "../../apiCalls/auth";
 import toast, { Toaster } from 'react-hot-toast';
+import { useDispatch } from "react-redux";
+import { hideLoader, showLoader } from "../../redux/loaderSlice";
 
 
 function Login(){
@@ -10,23 +12,31 @@ function Login(){
         password: ''
     });
 
+    const dispatch = useDispatch();
+
+    
+
      async function onFormSubmit(e){
             e.preventDefault();
             let response =null
             
             try {
+                dispatch(showLoader());
                 response = await loginUser(user);
-             
+                dispatch(hideLoader());
+                console.log(response);
                if(response.success){
-            
-                toast.success(response.message);
+            console.log(response);
+                // toast.success(response.message);
                 localStorage.setItem("token",response.token);
                 window.location.href="/"
                }else{
-                toast.error(response.message);
+                // toast.error(response.message);
                }
             } catch (error) {
-                toast.error(response.message);
+                console.log(error)
+                // toast.error(response.message);
+                dispatch(hideLoader());
             }
     
         }
