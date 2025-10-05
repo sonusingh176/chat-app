@@ -9,7 +9,7 @@ const Home = () => {
       <div className='main-content'>
 
         {/* SIDEBAR LAYOUT */}
-        <Sidebar/>
+        <Sidebar></Sidebar>
         {/* CHAT AREA LAYOUT */}
 
       </div>

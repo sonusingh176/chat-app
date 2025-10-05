@@ -24,7 +24,7 @@ router.get('/get-logged-user',authMiddleware,async (req,res)=>{
 
 
 //GET All User Except Logged In user 
-router.get('/get-all-user',authMiddleware,async (req,res)=>{
+router.get('/get-all-users',authMiddleware,async (req,res)=>{
     try {
       
         const alluser = await User.find({_id: {$ne:req.userId}}); //$ne means not equal

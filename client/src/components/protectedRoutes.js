@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
-import { getLoggedUser } from '../apiCalls/users';
+import { getLoggedUser ,getAllUsers} from '../apiCalls/users';
 import { useDispatch, useSelector } from 'react-redux';
-import { setUser } from '../redux/userSlice';
+import { setAllUsers, setUser } from '../redux/userSlice';
 
 const ProtectedRoutes = ({children}) => {
     const dispatch=useDispatch();
-    //  const {user}= useSelector((state)=>state.userReducer);
+    const {user}= useSelector((state)=>state.userReducer);
 
     const navigate = useNavigate();
 
@@ -28,9 +28,26 @@ const ProtectedRoutes = ({children}) => {
         }
     }
 
+    const getAllUsersFromDb = async()=>{
+        let response=null;
+        try {
+            response= await getAllUsers();
+            if(response.success){
+                console.log(response.data) 
+                dispatch(setAllUsers(response.data));  
+            }else{
+                navigate('/login')
+            }
+        } catch (error) {
+            console.log(error)
+            navigate('/login')
+        }    
+    }
+
     useEffect(() => {
         if(localStorage.getItem('token')){
             getloggedInUser();
+            getAllUsersFromDb();
         }else{
             navigate('/login')
         }

@@ -1,7 +1,13 @@
-function Search() {
+function Search({searchKey,setSearchKey}) {
+  console.log("searchKey:",searchKey);
   return (
     <div className="user-search-area">
-      <input type="text" placeholder="Search..." className="user-search-text"/>
+      <input type="text"
+       placeholder="Search..." 
+       className="user-search-text"
+       value={searchKey}
+        onChange={(e)=>setSearchKey(e.target.value)}
+       />
       <i className="fa fa-search user-search-btn" aria-hidden="true"></i>
      
     </div>
